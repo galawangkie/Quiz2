@@ -1,12 +1,12 @@
 let speed = 20;
-let scale = 0.17; // Image scale (I work on 1080p monitor)
+let scale = 0.17; 
 let canvas;
 let ctx;
 let logoColor;
 
 let dvd = {
-    x: 200,
-    y: 300,
+    x: 800,
+    y: 800,
     xspeed: 10,
     yspeed: 10,
     img: new Image()
@@ -15,9 +15,9 @@ let dvd = {
 (function main(){
     canvas = document.getElementById("tv-screen");
     ctx = canvas.getContext("2d");
-    dvd.img.src = 'dvd-logo.png';
+    dvd.img.src = 'logo.png';
 
-    //Draw the "tv screen"
+    //DRAW CANVAS
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
 
@@ -27,23 +27,23 @@ let dvd = {
 
 function update() {
     setTimeout(() => {
-        //Draw the canvas background
+        //CANVAS BG
         ctx.fillStyle = '#000';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        //Draw DVD Logo and his background
+        //DVD LOGO AND BG
         ctx.fillStyle = logoColor;
         ctx.fillRect(dvd.x, dvd.y, dvd.img.width*scale, dvd.img.height*scale);
         ctx.drawImage(dvd.img, dvd.x, dvd.y, dvd.img.width*scale, dvd.img.height*scale);
-        //Move the logo
+        //MOVE THE DVD
         dvd.x+=dvd.xspeed;
         dvd.y+=dvd.yspeed;
-        //Check for collision 
+        //CHECKING
         checkHitBox();
         update();   
     }, speed)
 }
 
-//Check for border collision
+//CHECK BORDER
 function checkHitBox(){
     if(dvd.x+dvd.img.width*scale >= canvas.width || dvd.x <= 0){
         dvd.xspeed *= -1;
@@ -56,7 +56,7 @@ function checkHitBox(){
     }    
 }
 
-//Pick a random color in RGB format
+//PICK A RANDOM COLOR
 function pickColor(){
     r = Math.random() * (254 - 0) + 0;
     g = Math.random() * (254 - 0) + 0;
